@@ -1,0 +1,33 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="21PointsGame (exploded)">
+    <output-path>$PROJECT_DIR$/build/classes/artifacts/21PointsGame__exploded_</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="21PointsGame/web/Web Gradle" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="21PointsGame" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: spring-webmvc-3.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: servlet-api-2.5" />
+          <element id="library" level="project" name="Gradle: jsp-api-2.1" />
+          <element id="library" level="project" name="Gradle: guava-11.0.2" />
+          <element id="library" level="project" name="Gradle: jackson-mapper-asl-1.9.5" />
+          <element id="library" level="project" name="Gradle: commons-logging-1.1.1" />
+          <element id="library" level="project" name="Gradle: spring-core-3.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: spring-expression-3.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: spring-beans-3.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: aopalliance-1.0" />
+          <element id="library" level="project" name="Gradle: spring-aop-3.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: spring-context-3.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: spring-web-3.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: jsr305-1.3.9" />
+          <element id="library" level="project" name="Gradle: jackson-core-asl-1.9.5" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/build/classes/artifacts/21PointsGame__exploded_/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
