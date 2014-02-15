@@ -1,7 +1,12 @@
+apply from: 'http://www.tellurianring.com/projects/gradle-plugins/gradle-templates/apply.groovy'
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'jetty'
+
+group = 'com.spring.21PointsGame'
 
 repositories {
     mavenCentral()
