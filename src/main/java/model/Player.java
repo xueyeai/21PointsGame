@@ -13,7 +13,12 @@ public class Player {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
+    public void addACard(Card card){
+        cards.add(card);
     }
+
+    public void subACard(Card card){
+        cards.remove(card);
+    }
+
 }
