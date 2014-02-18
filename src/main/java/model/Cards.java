@@ -23,8 +23,11 @@ public class Cards {
         remain.addAll(init);
     }
 
-    public Card deal(){
-        Card card=remain.get((int)(Math.random()*100%init.size()));
+    public Card deal() throws OutOfCapacityException{
+        if (remain.size()==0){
+            throw new OutOfCapacityException("Out Of Remain Cards Capacity!");
+        }
+        Card card=remain.get((int)(Math.random()*100%remain.size()));
         remain.remove(card);
         used.add(card);
         return card;
@@ -41,5 +44,7 @@ public class Cards {
     public List<Card> getUsed() {
         return used;
     }
+
+
 }
 

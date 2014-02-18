@@ -1,5 +1,7 @@
 package model;
 
+import com.google.common.base.Objects;
+
 /**
  * Created by xya on 2/15/14.
  */
@@ -22,9 +24,24 @@ public class Card {
 
     public FLOWER getFlower() {return flower; }
 
-    public POINT getPoint() {
-        return point;
+    public int getPoint() {
+        return point.point;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(point, flower);
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Card other = (Card) obj;
+        return Objects.equal(this.point, other.point) && Objects.equal(this.flower, other.flower);
+    }
 }
