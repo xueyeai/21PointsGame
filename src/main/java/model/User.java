@@ -7,6 +7,24 @@ public class User {
     private String userName;
     private int id;
     private String passwd;
+    private int roomNum;
+    private int score;
+
+    public int getRoomNum() {
+        return roomNum;
+    }
+
+    public void setRoomNum(int roomNum) {
+        this.roomNum = roomNum;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addScore(int addScore) {
+        this.score += addScore;
+    }
 
     public String getUserName() {
         return userName;

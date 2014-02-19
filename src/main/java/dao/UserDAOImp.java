@@ -7,7 +7,7 @@ import model.User;
  */
 public class UserDAOImp implements UserDAO {
     @Override
-    public User getUser() {
-        return null;
+    public User getUser(int id) {
+        return new User();
     }
 }
