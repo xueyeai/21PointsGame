@@ -70,13 +70,13 @@ public class GameRoom {
         dealCardsAtTheBeginning();
     }
 
-    public GameResult endGame(Player player){
+    public GameResult endGame(Player player) throws Exception{
         GameResult gameResult=endGame();
         gameResult.addLoser(player);
         return gameResult;
     }
 
-    public GameResult endGame(){
+    public GameResult endGame() throws Exception{
         sortPlayerList();
         nextPlayerList.clear();
         nextPlayerList.addAll(playerList);

@@ -314,5 +314,4 @@ public class GameRoomTest{
         assertThat(gameResult.getLosers().contains(player1),is(true));
     }
 
-
 }
