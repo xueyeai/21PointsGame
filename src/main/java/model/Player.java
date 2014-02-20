@@ -1,5 +1,6 @@
 package model;
 
+import com.google.common.base.Objects;
 import dao.UserDAO;
 import dao.UserDAOImp;
 import service.UserService;
@@ -14,11 +15,19 @@ public class Player {
     private List<Card> cards=new ArrayList<>();
     private String userName;
     private int userId;
-    private  int userScore;
+    private int userScore;
+    private int win=0;
+    private int lose=0;
+    private int deuce=0;
     private int tempScore=0;
     private int hit=0;
     private int roomNum=0;
 
+    public Player(){
+        this.userName="Anonymous";
+        this.userId=0;
+        this.userScore=0;
+    }
     public Player(User user){
         this.userName=user.getUserName();
         this.userId=user.getId();
@@ -79,4 +88,6 @@ public class Player {
     public void setTempScore(int tempScore) {
         this.tempScore = tempScore;
     }
+
+
 }

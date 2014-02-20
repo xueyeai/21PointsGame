@@ -46,5 +46,11 @@ public class Cards {
     }
 
 
+    public void shuffle() {
+        remain.clear();
+        used.clear();
+        remain.addAll(init);
+
+    }
 }
 
