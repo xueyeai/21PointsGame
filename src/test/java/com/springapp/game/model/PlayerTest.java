@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
  * Created by xya on 2/19/14.
  */
 public class PlayerTest {
-    private Player player1=new Player();
+    private Player player1=new Player(1);
     private GameRoom gameRoom =new GameRoom(2);
 
     @Test

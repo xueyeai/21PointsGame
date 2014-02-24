@@ -6,6 +6,7 @@ import com.springapp.game.model.Player;
  * Created by xya on 2/22/14.
  */
 public interface PlayerDAO {
+    public Player createPlayer(int id);
     public Player getPlayerById(int id);
     public void addScore(int id,int score);
     public void subScore(int id,int score);

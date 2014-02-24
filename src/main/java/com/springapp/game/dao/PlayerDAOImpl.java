@@ -22,6 +22,12 @@ public class PlayerDAOImpl implements PlayerDAO{
     }
 
     @Override
+    public Player createPlayer(int id) {
+        jdbcTemplate.execute("insert into player(id) values(id)");
+        return getPlayerById(id);
+    }
+
+    @Override
     public Player getPlayerById(int id) {
         Player player=jdbcTemplate.queryForObject(
                 "select id,score,win,lose,deuce from player where id = ?",
@@ -43,45 +49,52 @@ public class PlayerDAOImpl implements PlayerDAO{
 
     @Override
     public void addScore(int id, int score) {
-        jdbcTemplate.update("update player set score=score+?  where id= ? ",score,id);
+        add(id,"totalScore",score);
     }
 
     @Override
     public void subScore(int id, int score) {
-        jdbcTemplate.update("update player set score=score-?  where id= ? ",score,id);
+        sub(id, "totalScore", score);
     }
 
     @Override
     public void addWin(int id) {
-
+        add(id,"win",1);
     }
 
     @Override
     public void subWin(int id) {
-
+        sub(id, "win", 1);
     }
 
     @Override
     public void addLose(int id) {
-
+        add(id,"lose",1);
     }
 
     @Override
     public void subLose(int id) {
-
+        sub(id, "lose", 1);
     }
 
     @Override
     public void addDeuce(int id) {
-
+        add(id,"deuce",1);
     }
 
     @Override
     public void subDeuce(int id) {
-
+        sub(id, "deuce", 1);
     }
 
-    public void update(int id,String columnName,int num){
-        jdbcTemplate.update("update player set "+columnName+" ="+columnName+String.valueOf(num));
+    private void add(int id,String columnName,int num){
+        String sql=String.format("update player set %s=%s+%d where id = ?",columnName,columnName,num);
+        jdbcTemplate.update(sql,id);
     }
+
+    private void sub(int id,String columnName,int num){
+        String sql=String.format("update player set %s=%s-%d where id = ?",columnName,columnName,num);
+        jdbcTemplate.update(sql,id);
+    }
+
 }

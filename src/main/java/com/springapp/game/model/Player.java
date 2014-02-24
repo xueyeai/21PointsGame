@@ -8,27 +8,29 @@ import java.util.List;
  */
 public class Player {
     private List<Card> cards=new ArrayList<>();
-    private String username="";
-    private int id;
-    private int score;
+    private int id=0;
+    private int score=0;
     private int win=0;
     private int lose=0;
     private int deuce=0;
+    private String username="";
     private int tempScore=0;
     private int roomNo =0;
 
-    public Player(){
+    public Player(){}
+    public Player(int id,String username,int score,int win,int lose,int deuce){
+        this.id=id;
+        this.username=username;
+        this.score=score;
+        this.win=win;
+        this.lose=lose;
+        this.deuce=deuce;
         initTempVariable();
     }
 
     public void initTempVariable() {
         setRoomNo(0);
         setTempScore(0);
-    }
-
-
-    public List<Card> getCards() {
-        return cards;
     }
 
     public void addACard(Card card){
@@ -42,6 +44,14 @@ public class Player {
 
         }
         return point;
+    }
+
+    public void addTempScore(int tempScore) {
+        this.tempScore += tempScore;
+    }
+
+    public List<Card> getCards() {
+        return cards;
     }
 
     public int getScore() {
@@ -62,10 +72,6 @@ public class Player {
 
     public int getTempScore() {
         return tempScore;
-    }
-
-    public void addTempScore(int tempScore) {
-        this.tempScore += tempScore;
     }
 
     public void setCards(List<Card> cards) {
