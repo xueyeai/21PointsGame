@@ -54,8 +54,64 @@ public class Player {
         return cards;
     }
 
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getScore() {
         return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getWin() {
+        return win;
+    }
+
+    public void setWin(int win) {
+        this.win = win;
+    }
+
+    public int getLose() {
+        return lose;
+    }
+
+    public void setLose(int lose) {
+        this.lose = lose;
+    }
+
+    public int getDeuce() {
+        return deuce;
+    }
+
+    public void setDeuce(int deuce) {
+        this.deuce = deuce;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getTempScore() {
+        return tempScore;
+    }
+
+    public void setTempScore(int tempScore) {
+        this.tempScore = tempScore;
     }
 
     public int getRoomNo() {
@@ -64,41 +120,5 @@ public class Player {
 
     public void setRoomNo(int roomNo) {
         this.roomNo = roomNo;
-    }
-
-    public void setTempScore(int tempScore) {
-        this.tempScore = tempScore;
-    }
-
-    public int getTempScore() {
-        return tempScore;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public void setWin(int win) {
-        this.win = win;
-    }
-
-    public void setLose(int lose) {
-        this.lose = lose;
-    }
-
-    public void setDeuce(int deuce) {
-        this.deuce = deuce;
     }
 }

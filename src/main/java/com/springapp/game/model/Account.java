@@ -9,8 +9,17 @@ public class Account {
     private int id;
     private String username;
     private String password;
+    private String lastLoginIP;
     private Date lastLoginTime;
     private Date registerTime;
+
+    public String getLastLoginIP() {
+        return lastLoginIP;
+    }
+
+    public void setLastLoginIP(String lastLoginIP) {
+        this.lastLoginIP = lastLoginIP;
+    }
 
     public int getId() {
         return id;

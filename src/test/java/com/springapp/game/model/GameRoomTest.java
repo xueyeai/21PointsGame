@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
  * Created by xya on 2/17/14.
  */
 public class GameRoomTest {
-    private Player player1=new Player(1);
-    private Player player2=new Player(1);
+    private Player player1=new Player();
+    private Player player2=new Player();
     GameRoom gameRoom =new GameRoom(2);
     int roomNum=0;
 
@@ -46,7 +46,7 @@ public class GameRoomTest {
         gameRoom.joinRoom(player1);
         gameRoom.joinRoom(player2);
         try {
-            gameRoom.joinRoom(new Player(1));
+            gameRoom.joinRoom(new Player());
         }catch (Exception e){
             if(e instanceof RoomIsFullException){
                 return;

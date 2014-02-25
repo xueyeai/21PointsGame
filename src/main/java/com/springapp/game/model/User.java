@@ -6,20 +6,19 @@ import java.util.Date;
  * Created by xya on 2/16/14.
  */
 public class User {
-    private int id;
-    private String username;
-    private String nickname;
-    private String email;
-    private String description;
-    private int online;
+    private int id=0;
+    private String nickname="";
+    private String email="";
+    private String description="";
+    private String city="";
+    private int online=0;
 
-    public User(int id, String username, String nickname, String email, String description, int online) {
-        this.id = id;
-        this.username = username;
-        this.nickname = nickname;
-        this.email = email;
-        this.description = description;
-        this.online = online;
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public int getId() {
@@ -28,14 +27,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getNickname() {

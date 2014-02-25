@@ -36,6 +36,9 @@ public class GameRoom {
     public GameRoom(int roomNo){
         this(roomNo,new Cards(),2);
     }
+    public GameRoom(int roomNo,int capacity){
+        this(roomNo,new Cards(),capacity);
+    }
 
     public void joinRoom(Player player) throws Exception{
         if(playerList.size()<capacity){

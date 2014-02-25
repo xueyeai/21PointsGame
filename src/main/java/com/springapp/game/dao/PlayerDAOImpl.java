@@ -1,8 +1,10 @@
 package com.springapp.game.dao;
 
 import com.springapp.game.model.Player;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,20 +12,22 @@ import java.sql.SQLException;
 /**
  * Created by xya on 2/22/14.
  */
+@Repository
 public class PlayerDAOImpl implements PlayerDAO{
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
     @Override
     public Player createPlayer(int id) {
-        jdbcTemplate.execute("insert into player(id) values(id)");
+        jdbcTemplate.execute(" insert into player(id) values(id) ");
         return getPlayerById(id);
     }
 
@@ -48,53 +52,8 @@ public class PlayerDAOImpl implements PlayerDAO{
     }
 
     @Override
-    public void addScore(int id, int score) {
-        add(id,"totalScore",score);
-    }
-
-    @Override
-    public void subScore(int id, int score) {
-        sub(id, "totalScore", score);
-    }
-
-    @Override
-    public void addWin(int id) {
-        add(id,"win",1);
-    }
-
-    @Override
-    public void subWin(int id) {
-        sub(id, "win", 1);
-    }
-
-    @Override
-    public void addLose(int id) {
-        add(id,"lose",1);
-    }
-
-    @Override
-    public void subLose(int id) {
-        sub(id, "lose", 1);
-    }
-
-    @Override
-    public void addDeuce(int id) {
-        add(id,"deuce",1);
-    }
-
-    @Override
-    public void subDeuce(int id) {
-        sub(id, "deuce", 1);
-    }
-
-    private void add(int id,String columnName,int num){
-        String sql=String.format("update player set %s=%s+%d where id = ?",columnName,columnName,num);
-        jdbcTemplate.update(sql,id);
-    }
-
-    private void sub(int id,String columnName,int num){
-        String sql=String.format("update player set %s=%s-%d where id = ?",columnName,columnName,num);
-        jdbcTemplate.update(sql,id);
+    public void updatePlayerData(Player player){
+        jdbcTemplate.update("update player set score=?, win=?, lose=?, deuce=?",player.getScore(),player.getWin(),player.getLose(),player.getDeuce());
     }
 
 }
