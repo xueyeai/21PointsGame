@@ -8,5 +8,6 @@ import com.springapp.game.model.Player;
 public interface PlayerService {
     public Player getPlayerById(int id);
     public void updatePlayerData(Player player);
+    public Player registerPlayer(int id);
 
 }

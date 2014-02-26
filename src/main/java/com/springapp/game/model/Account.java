@@ -60,4 +60,6 @@ public class Account {
     public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
+
+
 }

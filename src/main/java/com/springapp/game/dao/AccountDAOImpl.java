@@ -60,6 +60,16 @@ public class AccountDAOImpl implements AccountDAO {
 
     @Override
     public int getMatchCount(String username, String password) {
-        return jdbcTemplate.queryForObject(" select count(*) from account where username=?,password=?",int.class,username,password);
+        return jdbcTemplate.queryForObject(" select count(*) from account where username=? and password=?",Integer.class,username,password);
+    }
+
+    @Override
+    public Boolean isRegistered(String username) {
+        if(jdbcTemplate.queryForObject("select count(*) from account where username=?",Integer.class,username)==0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

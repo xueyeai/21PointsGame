@@ -35,4 +35,9 @@ public class GameRoomImpl implements GameRoomDAO {
         return gameRoom;
     }
 
+    @Override
+    public int getGameRoomNum() {
+        return jdbcTemplate.queryForObject("select count(*) from gameRoom",Integer.class);
+    }
+
 }

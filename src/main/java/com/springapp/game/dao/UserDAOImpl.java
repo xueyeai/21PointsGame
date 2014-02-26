@@ -31,7 +31,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getUserById(int id) {
         User user=jdbcTemplate.queryForObject(
-                "select id.nickname,email,city,description from user where id=?",new Object[]{id},
+                "select id,nickname,email,city,description from user where id=?",new Object[]{id},
                 new RowMapper<User>() {
                     @Override
                     public User mapRow(ResultSet rs, int rowNum) throws SQLException {

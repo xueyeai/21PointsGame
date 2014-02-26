@@ -1,6 +1,7 @@
 package com.springapp.game.controller;
 
 import com.springapp.game.dao.PlayerDAO;
+import com.springapp.game.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,21 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class PlayerController {
 
     @Autowired
-    private PlayerDAO playerDAO;
+    private PlayerService playerService;
 
     @RequestMapping("/player")
     public ModelAndView addScore(){
         ModelAndView view=new ModelAndView("player");
-        playerDAO.addScore(1,1);
         view.addObject("name","xxx");
         return view;
     }
 
-    public PlayerDAO getPlayerDAO() {
-        return playerDAO;
-    }
-
-    public void setPlayerDAO(PlayerDAO playerDAO) {
-        this.playerDAO = playerDAO;
-    }
 }

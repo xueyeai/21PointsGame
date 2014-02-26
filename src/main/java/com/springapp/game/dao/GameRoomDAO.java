@@ -7,4 +7,5 @@ import com.springapp.game.model.GameRoom;
  */
 public interface GameRoomDAO {
     public GameRoom getGameRoomByID(int id);
+    public int getGameRoomNum();
 }

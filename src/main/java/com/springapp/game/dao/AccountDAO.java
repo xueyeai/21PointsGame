@@ -11,5 +11,6 @@ public interface AccountDAO {
     public void changePassword(Account account);
     public void updateLoginInfo(Account account);
     public int getMatchCount(String username,String password);
+    public Boolean isRegistered(String username);
 
 }
