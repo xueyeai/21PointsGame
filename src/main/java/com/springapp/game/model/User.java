@@ -1,17 +1,15 @@
 package com.springapp.game.model;
 
-import java.util.Date;
-
 /**
  * Created by xya on 2/16/14.
  */
 public class User {
-    private int id=0;
-    private String nickname="";
-    private String email="";
-    private String description="";
-    private String city="";
-    private int online=0;
+    private int id = 0;
+    private String nickname = "";
+    private String email = "";
+    private String description = "";
+    private String city = "";
+    private int online = 0;
 
     public String getCity() {
         return city;

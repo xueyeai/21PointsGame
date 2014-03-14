@@ -10,16 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -27,7 +21,7 @@ import java.util.regex.Pattern;
  */
 @Controller
 @RequestMapping("/account")
-@SessionAttributes({"account","user","player"})
+@SessionAttributes(value = {"account", "user", "player"}, types = {Account.class, User.class, Player.class})
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -37,83 +31,84 @@ public class AccountController {
     private PlayerService playerService;
 
     @RequestMapping("/login")
-    public ModelAndView loginPage(HttpServletRequest req){
-        if(req.getSession().getAttribute("user")==null){
+    public ModelAndView loginPage(HttpServletRequest req) {
+        if (req.getSession(true).getAttribute("user") == null) {
             return new ModelAndView("login");
-        }
-        else{
-            return new ModelAndView("redirect:/21PointsGame/manage");
+        } else {
+            return new ModelAndView("redirect:/manage/main");
         }
     }
 
-    @RequestMapping(value="/check",method= RequestMethod.POST)
-    public ModelAndView checkPage(HttpServletRequest req){
-        String username=req.getParameter("username");
-        String password=req.getParameter("password");
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    public ModelAndView checkPage(HttpServletRequest req) {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
 
-        if (!accountService.getMatchCount(username,password)){
-            return new ModelAndView("login","err","error username or password!");
+        if (!accountService.getMatchCount(username, password)) {
+            return new ModelAndView("login", "error", "error username or password!");
         }
-        Account account=accountService.getAccountByUsername(username);
-        User user=userService.getUserById(account.getId());
-        Player player=playerService.getPlayerById(account.getId());
-        return new ModelAndView("redirect:/21PointsGame/hall");
+        Account account = accountService.getAccountByUsername(username);
+        User user = userService.getUserById(account.getId());
+        Player player = playerService.getPlayerById(account.getId());
+
+        ModelAndView view = new ModelAndView("redirect:/manage/main");
+        view.addObject("user", user);
+        view.addObject("player", player);
+        view.addObject("account", account);
+        return view;
     }
 
     @RequestMapping("/logout")
-    public ModelAndView logoutPage(HttpServletRequest req){
+    public ModelAndView logoutPage(HttpServletRequest req) {
         req.getSession().invalidate();
         return new ModelAndView("login");
     }
 
     @RequestMapping("/register")
-    public ModelAndView registerPage(HttpServletRequest req){
+    public ModelAndView registerPage(HttpServletRequest req) {
         return new ModelAndView("register");
     }
 
-    @RequestMapping(value="/registerCheck",method=RequestMethod.POST)
-    public ModelAndView registerCheck(HttpServletRequest req){
-        String password1= req.getParameter("password1");
-        String password2= req.getParameter("password2");
-        String username=req.getParameter("username");
+    @RequestMapping(value = "/registerCheck", method = RequestMethod.POST)
+    public ModelAndView registerCheck(HttpServletRequest req) {
+        String password1 = req.getParameter("password1");
+        String password2 = req.getParameter("password2");
+        String username = req.getParameter("username");
 
-        if(! (password1.equals(password2))){
-            return new ModelAndView("register","err","Entered passwords differ!");
+        if (!(password1.equals(password2))) {
+            return new ModelAndView("register", "error", "Entered passwords differ!");
         }
 
-        if (accountService.isRegistered(username)){
-            return new ModelAndView("register","err","Username is already used!");
+        if (accountService.isRegistered(username)) {
+            return new ModelAndView("register", "error", "Username is already used!");
         }
 
-        String nickname=req.getParameter("nickname");
-        String city=req.getParameter("city");
-        String email=req.getParameter("email");
-        String description=req.getParameter("description");
-
-        if(checkRegisterForm(username,password1,nickname,city,email,description)){
-            Account account=accountService.register(username,password1);
-            User user=userService.registerUser(account.getId(),nickname,email,city,description);
-            Player player=playerService.registerPlayer(account.getId());
+        if (!checkRegisterForm(username, password1)) {
+            return new ModelAndView("register", "error", "You information is incorrectly formatted!");
         }
 
-        return new ModelAndView("redirect:/21PointsGame/manage");
+        Account account = accountService.registerAccount(username, password1);
+        User user = userService.registerUser(account.getId(), "", "", "", "");
+        Player player = playerService.registerPlayer(account.getId());
+        ModelAndView view = new ModelAndView("redirect:/manage/main");
+        view.addObject("user", user);
+        view.addObject("player", player);
+        view.addObject("account", account);
+        return view;
     }
 
-    private Boolean checkRegisterForm(String username,String password,String nickname,String city,String email,String description){
-        if(username==null || password==null){
+    private Boolean checkRegisterForm(String username, String password) {
+        if (username == null || password == null) {
             return false;
         }
-        Pattern usernamePattern = Pattern.compile("[a-zA-Z][a-zA-Z0-9].{5,14}");
-        Pattern passwordPattern=Pattern.compile("[a-zA-Z0-9@#$%].{6,20}");
-        Pattern nicknamePattern=Pattern.compile("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-        if(!usernamePattern.matcher(username).matches()){
+        Pattern usernamePattern = Pattern.compile("[a-zA-Z0-9].{6,15}");
+        Pattern passwordPattern = Pattern.compile("[a-zA-Z0-9@#$%].{6,20}");
+        if (!usernamePattern.matcher(username).matches()) {
             return false;
         }
-        if(!passwordPattern.matcher(password).matches()){
+        if (!passwordPattern.matcher(password).matches()) {
             return false;
         }
-
-
         return true;
     }
 }

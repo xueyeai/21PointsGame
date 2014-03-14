@@ -1,16 +1,68 @@
 package com.springapp.game.dao;
 
 import com.springapp.game.model.Account;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by xya on 2/24/14.
  */
-public interface AccountDAO {
-    public Account createAccount(String username,String password);
-    public Account getAccountByUsername(String username);
-    public void changePassword(Account account);
-    public void updateLoginInfo(Account account);
-    public int getMatchCount(String username,String password);
-    public Boolean isRegistered(String username);
+@Repository
+public class AccountDAO {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public Account createAccount(String username, String password) {
+        jdbcTemplate.update(" insert into account(username,password) values(?,?)", username, password);
+        return getAccountByUsername(username);
+    }
+
+    public Account getAccountByUsername(String username) {
+        Account account = jdbcTemplate.queryForObject(
+                " select id,username,password,registerTime,lastLoginTime,lastLoginIP from account where username=? ",
+                new Object[]{username},
+                new RowMapper<Account>() {
+                    @Override
+                    public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Account account = new Account();
+                        account.setUsername(rs.getString("username"));
+                        account.setPassword(rs.getString("password"));
+                        account.setId(rs.getInt("id"));
+                        account.setLastLoginTime(rs.getDate("lastLoginTime"));
+                        account.setLastLoginIP(rs.getString("lastLoginIP"));
+                        account.setRegisterTime(rs.getDate("registerTime"));
+                        return account;
+                    }
+                });
+        return account;
+    }
+
+    public void changePassword(Account account) {
+        jdbcTemplate.update(" update account set password=? where id=? ", account.getPassword(), account.getId());
+    }
+
+    public void updateLoginInfo(Account account) {
+        jdbcTemplate.update(" update account set lastLoginIP=?,lastLoginTime=?", account.getLastLoginIP(), account.getLastLoginTime());
+    }
+
+    public int getMatchCount(String username, String password) {
+        return jdbcTemplate.queryForObject(" select count(*) from account where username=? and password=?", Integer.class, username, password);
+    }
+
+    public Boolean isRegistered(String username) {
+        if (jdbcTemplate.queryForObject("select count(*) from account where username=?", Integer.class, username) != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

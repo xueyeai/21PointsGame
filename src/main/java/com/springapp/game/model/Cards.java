@@ -9,13 +9,13 @@ import java.util.List;
  * Created by xya on 2/15/14.
  */
 public class Cards {
-    private List<Card> init=new ArrayList<>();
-    private List<Card> remain=new ArrayList<>();
-    private List<Card> used=new ArrayList<>();
+    private List<Card> init = new ArrayList<>();
+    private List<Card> remain = new ArrayList<>();
+    private List<Card> used = new ArrayList<>();
 
-    public Cards(){
-        for(Card.FLOWER flower: Card.FLOWER.values()){
-            for(Card.POINT point: Card.POINT.values()){
+    public Cards() {
+        for (Card.FLOWER flower : Card.FLOWER.values()) {
+            for (Card.POINT point : Card.POINT.values()) {
                 init.add(new Card(flower, point));
             }
         }
@@ -24,13 +24,17 @@ public class Cards {
     }
 
     public Card deal() throws OutOfCapacityException {
-        if (remain.size()==0){
+        if (remain.size() == 0) {
             throw new OutOfCapacityException("Out Of Remain Cards Capacity!");
         }
-        Card card=remain.get((int)(Math.random()*100%remain.size()));
+        Card card = getRandomCard();
         remain.remove(card);
         used.add(card);
         return card;
+    }
+
+    private Card getRandomCard() {
+        return remain.get((int) (Math.random() * 100 % remain.size()));
     }
 
     public List<Card> getInit() {

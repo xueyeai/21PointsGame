@@ -7,24 +7,26 @@ import java.util.List;
  * Created by xya on 2/15/14.
  */
 public class Player {
-    private List<Card> cards=new ArrayList<>();
-    private int id=0;
-    private int score=0;
-    private int win=0;
-    private int lose=0;
-    private int deuce=0;
-    private String username="";
-    private int tempScore=0;
-    private int roomNo =0;
+    private List<Card> cards = new ArrayList<>();
+    private int id = 0;
+    private int score = 0;
+    private int win = 0;
+    private int lose = 0;
+    private int deuce = 0;
+    private String username = "";
+    private int tempScore = 0;
+    private int roomNo = 0;
 
-    public Player(){}
-    public Player(int id,String username,int score,int win,int lose,int deuce){
-        this.id=id;
-        this.username=username;
-        this.score=score;
-        this.win=win;
-        this.lose=lose;
-        this.deuce=deuce;
+    public Player() {
+    }
+
+    public Player(int id, String username, int score, int win, int lose, int deuce) {
+        this.id = id;
+        this.username = username;
+        this.score = score;
+        this.win = win;
+        this.lose = lose;
+        this.deuce = deuce;
         initTempVariable();
     }
 
@@ -33,14 +35,14 @@ public class Player {
         setTempScore(0);
     }
 
-    public void addACard(Card card){
+    public void addACard(Card card) {
         cards.add(card);
     }
 
     public int getCardsPoint() {
-        int point=0;
-        for(Card card:cards){
-            point+=card.getPoint();
+        int point = 0;
+        for (Card card : cards) {
+            point += card.getPoint();
 
         }
         return point;

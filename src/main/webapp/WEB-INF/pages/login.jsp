@@ -13,13 +13,13 @@
     <title>Welcome!</title>
 </head>
 <body>
-    <c:if test="${!empty error}">
-        <font color="red"><c:out value="${error}"/></font>
-    </c:if>
-    <form name="login" method="post" action="check">
-        Username: <input name="username" type="text"><br>
-        Password: <input name="password" type="password"><br>
-        <input type="submit" value="Submit">
-    </form>
+<form name="login" method="post" action="check">
+    Username: <input name="username" type="text"><br>
+    Password: <input name="password" type="password"><br>
+    <input type="submit" value="Submit">
+</form>
+<c:if test="${!empty error}">
+    <font color="red"><c:out value="${error}"/></font>
+</c:if>
 </body>
 </html>
